@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "854061214167",
+    "firebase_url": "https://vwede-6cbee.firebaseio.com",
+    "project_id": "vwede-6cbee",
+    "storage_bucket": "vwede-6cbee.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:854061214167:android:a8ba488f66fd00e2dc4392",
+        "android_client_info": {
+          "package_name": "com.example.vwede"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "854061214167-uql8kk5m8mc4r93ndi7n6hki4v4rafc4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.vwede",
+            "certificate_hash": "d116804757cb3bb5f53ba43c18c4631eba04c0c6"
+          }
+        },
+        {
+          "client_id": "854061214167-jc9lpr7jvf1ps6deq7be2qg53ono2nol.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5Y4iRvHgEIL0mgaVptybgKntXTFctGB0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "854061214167-jc9lpr7jvf1ps6deq7be2qg53ono2nol.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

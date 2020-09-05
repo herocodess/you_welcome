@@ -1,8 +1,14 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_country_picker/flutter_country_picker.dart';
+import 'package:provider/provider.dart';
+import 'package:vwede/core/provider/provider.dart';
+import 'package:vwede/core/viewModel/signInVm.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -10,13 +16,16 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+    return MultiProvider(
+      providers: registerProviders,
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        home: MyHomePage(title: 'Flutter Demo Home Page'),
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
@@ -35,6 +44,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  SignInVm signInVm;
 
   Country _selected;
   String _selectedNum;
@@ -205,7 +216,9 @@ class _MyHomePageState extends State<MyHomePage> {
             numberState=1;
           }
           else{
-            numberState=0;
+            String phone = "+$_selectedNum"+"${myController.text.toString()}";
+            print(phone);
+            signInVm.phoneAuth(phone, context);
           }
         });
 
@@ -237,11 +250,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    signInVm = context.watch<SignInVm>();
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: ListView(
+      body: signInVm.isLoading==true?Center(child: CircularProgressIndicator(),): ListView(
         shrinkWrap: true,
         physics: ScrollPhysics(),
         children: <Widget>[
