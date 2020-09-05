@@ -81,4 +81,77 @@ class SignInVm extends ChangeNotifier {
           print(verificationId);
         });
   }
+
+//  Future<bool> _sendSignInWithEmailLink() async {
+//    final FirebaseAuth user = FirebaseAuth.instance;
+//    try {
+//      user.sendSignInWithEmailLink(
+//          email: _email,
+//          androidInstallIfNotAvailable: true,
+//          iOSBundleID: "com.example.passwordless_login",
+//          androidMinimumVersion: "16",
+//          androidPackageName: "com.example.passwordless_login",
+//          url: "https://nothisispatrick.page.link/krabby",
+//          handleCodeInApp: true);
+//    } catch (e) {
+//      _showDialog(e.toString());
+//      return false;
+//    }
+//    print(_email + "<< sent");
+//    return true;
+//  }
+//
+//  @override
+//  void didChangeAppLifecycleState(AppLifecycleState state) {
+//    if (state == AppLifecycleState.resumed) {
+//      _retrieveDynamicLink();
+//    }
+//  }
+//
+//  Future<void> _retrieveDynamicLink() async {
+//    final PendingDynamicLinkData data =
+//    await FirebaseDynamicLinks.instance.retrieveDynamicLink();
+//
+//    final Uri deepLink = data?.link;
+//    print(deepLink.toString());
+//
+//    if (deepLink.toString() != null) {
+//      _link = deepLink.toString();
+//      _signInWithEmailAndLink();
+//    }
+//    return deepLink.toString();
+//  }
+//
+//  Future<void> _signInWithEmailAndLink(BuildContext context) async {
+//    final FirebaseAuth user = FirebaseAuth.instance;
+//    bool validLink = await user.isSignInWithEmailLink(_link);
+//    if (validLink) {
+//      try {
+//        await user.signInWithEmailAndLink(email: _email, link: _link);
+//      } catch (e) {
+//        print(e);
+//        _showDialog(e.toString());
+//      }
+//    }
+//  }
+//
+//  void _showDialog(String error, BuildContext context) {
+//    showDialog(
+//      context: context,
+//      builder: (BuildContext context) {
+//        return AlertDialog(
+//          title: new Text("Error"),
+//          content: new Text("Please Try Again.Error code: " + error),
+//          actions: <Widget>[
+//            new FlatButton(
+//              child: new Text("Close"),
+//              onPressed: () {
+//                Navigator.of(context).pop();
+//              },
+//            ),
+//          ],
+//        );
+//      },
+//    );
+//  }
 }
