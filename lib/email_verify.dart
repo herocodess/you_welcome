@@ -94,14 +94,6 @@ class _EmailVerificationState extends State<EmailVerification> with WidgetsBindi
   Future<bool> _sendSignInWithEmailLink() async {
     final FirebaseAuth user = FirebaseAuth.instance;
     try {
-//      user.sendSignInWithEmailLink(
-//          email: _email,
-//          androidInstallIfNotAvailable: true,
-//          iOSBundleID: "com.example.passwordless_login",
-//          androidMinimumVersion: "16",
-//          androidPackageName: "com.example.passwordless_login",
-//          url: "https://nothisispatrick.page.link/krabby",
-//          handleCodeInApp: true);
       auth.ActionCodeSettings actionCodeSettings = new auth.ActionCodeSettings(
           url: "https://vwede.page.link/crAckHeAd",
           handleCodeInApp: true,
@@ -123,14 +115,18 @@ class _EmailVerificationState extends State<EmailVerification> with WidgetsBindi
   }
 
   Future<void> _retrieveDynamicLink() async {
+    Uri uri = Uri.parse("https://vwede.page.link/crAckHeAd");
     final PendingDynamicLinkData data =
-    await FirebaseDynamicLinks.instance.getInitialLink();
+    await FirebaseDynamicLinks.instance.getDynamicLink(uri);
+    print("dataaaaaaaaaaaa $data");
 
     final Uri deepLink = data?.link;
     print(deepLink.toString());
 
     if (deepLink.toString() != null) {
       _link = deepLink.toString();
+      print(_email);
+      print(_link);
       _signInWithEmailAndLink();
     }
     return deepLink.toString();
@@ -138,10 +134,13 @@ class _EmailVerificationState extends State<EmailVerification> with WidgetsBindi
 
   Future<void> _signInWithEmailAndLink() async {
     final FirebaseAuth user = FirebaseAuth.instance;
-    bool validLink = await user.isSignInWithEmailLink(_link);
+    bool validLink = user.isSignInWithEmailLink(_link);
+    print(validLink);
     if (validLink) {
       try {
-        await user.signInWithEmailLink(email: _email, emailLink: _link);
+        var res = await user.signInWithEmailLink(email: _email, emailLink: _link);
+        print("$_email signed innnnnnnnnnnnn");
+        print("$res resssssss");
       } catch (e) {
         print(e);
         _showDialog(e.toString());
